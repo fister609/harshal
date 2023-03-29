@@ -18,7 +18,7 @@ class _ProfileState extends State<Profile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppBar(
+            AppBar(title: Text('PROFILE',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 25),),
             ),
             SizedBox(height: 20),
             Center(

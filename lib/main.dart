@@ -1,3 +1,4 @@
+import 'package:first/buy_sell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:calendar_timeline/calendar_timeline.dart';
@@ -5,6 +6,7 @@ import 'study.dart';
 import 'chat.dart';
 import 'profile.dart';
 import 'package:first/About.dart';
+import 'calendar.dart';
 
 void main()
 {
@@ -125,6 +127,7 @@ class EventsPage extends StatefulWidget
 
 class _EventsPageState extends State<EventsPage>
 {
+  int size =5;
   late DateTime _selectedDate;
   @override
   void initState() {
@@ -136,180 +139,273 @@ class _EventsPageState extends State<EventsPage>
   }
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.deepOrange,
-          title: Title(color: Colors.white, child: Text('Fi-ster',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,),),),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(onPressed: () {}, icon: Icon(Icons.search, weight: 20)),
-            ),
-          ],
-          elevation: 3,
-        ),
         drawer: Drawer(
           child: MainDrawer(),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("UPCOMING EVENTS",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 11,top: 11),
-                          height: 200,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(7),),
-                            border: Border.all(width: 3),
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(right: 11,top: 11),
-                          height: 200,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(7),),
-                            border: Border.all(width: 3),
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(right: 11, top: 11),
-                          height: 200,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(7),),
-                            border: Border.all(width: 3),
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(right: 11, top: 11),
-                          height: 200,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(7),),
-                            border: Border.all(width: 3),
-                            color: Colors.transparent,
-                          ),
-                        ),
-                      ],
+        body:  PageView(
+          children: [
+            SingleChildScrollView(
+                child: Column(
+                  children: [
+                    AppBar(
+                      backgroundColor: Colors.deepOrange,
+                      title: Title(color: Colors.white, child: Text('Fi-ster',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,),),),
+                      actions: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: IconButton(onPressed: () {
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => CalendarPage()));
+                          }, icon: Icon(Icons.calendar_month, weight: 20)),
+
+                        ),],
+                      elevation: 3,
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("RECENT EVENTS",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 11,top: 11),
-                          height: 200,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(7),),
-                            border: Border.all(width: 3),
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(right: 11,top: 11),
-                          height: 200,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(7),),
-                            border: Border.all(width: 3),
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(right: 11, top: 11),
-                          height: 200,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(7),),
-                            border: Border.all(width: 3),
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(right: 11, top: 11),
-                          height: 200,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(7),),
-                            border: Border.all(width: 3),
-                            color: Colors.transparent,
-                          ),
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("UPCOMING EVENTS",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
                     ),
-                  ),
+                    InkWell(
+                              onTap: (){
+                                showGeneralDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+                                  barrierColor: Colors.black.withOpacity(0.5),
+                                  transitionDuration: const Duration(milliseconds: 200),
+                                  pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+                                    return Center(
+                                      child: Container(
+                                        width: 350,
+                                        height: 500,
+                                        color: Colors.white,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text("No Events Currently listed!",style: TextStyle(color: Colors.black, fontSize: 15)),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("Close"),
+                                            ),
+                                          ],),
+                                      ),);
+                                  },);},
+                                        child: Container(
+                                        margin: EdgeInsets.all(11),
+                                        height: 200,
+                                        width: 400,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(Radius.circular(7),),
+                                          border: Border.all(width: 3),
+                                          color: Colors.transparent,
+                                        ),
+                                      ),
+                            ),
+                    InkWell(
+                              onTap: (){
+                                showGeneralDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+                                  barrierColor: Colors.black.withOpacity(0.5),
+                                  transitionDuration: const Duration(milliseconds: 200),
+                                  pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+                                    return Center(
+                                      child: Container(
+                                        width: 350,
+                                        height:500,
+                                        color: Colors.white,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text("No Events Currently listed!",style: TextStyle(color: Colors.black, fontSize: 15)),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("Close"),
+                                            ),
+                                          ],),
+                                      ),);
+                                  },);},
+                              child: Container(
+                                margin: EdgeInsets.all(11),
+                                height: 200,
+                                width: 400,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(7),),
+                                  border: Border.all(width: 3),
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                            ),
+                    InkWell(
+                              onTap: (){
+                                showGeneralDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+                                  barrierColor: Colors.black.withOpacity(0.5),
+                                  transitionDuration: const Duration(milliseconds: 200),
+                                  pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+                                    return Center(
+                                      child: Container(
+                                        width: 350,
+                                        height: 500,
+                                        color: Colors.white,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text("No Events Currently listed!",style: TextStyle(color: Colors.black, fontSize: 15)),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("Close"),
+                                            ),
+                                          ],),
+                                      ),);
+                                  },);},
+                              child: Container(
+                                margin: EdgeInsets.all(11),
+                                height: 200,
+                                width: 400,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(7),),
+                                  border: Border.all(width: 3),
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                            ),
+                    InkWell(
+                              onTap: (){
+                                showGeneralDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+                                  barrierColor: Colors.black.withOpacity(0.5),
+                                  transitionDuration: const Duration(milliseconds: 200),
+                                  pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+                                    return Center(
+                                      child: Container(
+                                        width: 350,
+                                        height: 500,
+                                        color: Colors.white,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text("No Events Currently listed!",style: TextStyle(color: Colors.black, fontSize: 15)),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("Close"),
+                                            ),
+                                          ],),
+                                      ),);
+                                  },);},
+                              child: Container(
+                                margin: EdgeInsets.all(11),
+                                height: 200,
+                                width: 400,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(7),),
+                                  border: Border.all(width: 3),
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                            ),
+                    InkWell(
+                      onTap: (){
+                        showGeneralDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+                          barrierColor: Colors.black.withOpacity(0.5),
+                          transitionDuration: const Duration(milliseconds: 200),
+                          pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+                            return Center(
+                              child: Container(
+                                width: 350,
+                                height: 500,
+                                color: Colors.white,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text("No Events Currently listed!",style: TextStyle(color: Colors.black, fontSize: 15)),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Close"),
+                                    ),
+                                  ],),
+                              ),);
+                          },);},
+                      child: Container(
+                        margin: EdgeInsets.all(11),
+                        height: 200,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(7),),
+                          border: Border.all(width: 3),
+                          color: Colors.transparent,
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: (){
+                        showGeneralDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+                          barrierColor: Colors.black.withOpacity(0.5),
+                          transitionDuration: const Duration(milliseconds: 200),
+                          pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+                            return Center(
+                              child: Container(
+                                width: 350,
+                                height: 500,
+                                color: Colors.white,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text("No Events Currently listed!",style: TextStyle(color: Colors.black, fontSize: 15)),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Close"),
+                                    ),
+                                  ],),
+                              ),);
+                          },);},
+                      child: Container(
+                        margin: EdgeInsets.all(11),
+                        height: 200,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(7),),
+                          border: Border.all(width: 3),
+                          color: Colors.transparent,
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: 10),
+
+                  ],
                 ),
-                SizedBox(height: 10),
-                Padding(
-                   padding: const EdgeInsets.all(8.0),
-                   child: Container(
-                     decoration: BoxDecoration(
-                       color: Colors.transparent,
-                       borderRadius: BorderRadius.circular(7),
-                       border: Border.all(width: 3,style: BorderStyle.solid),
-                     ),
-                     child: ListTile(
-                         leading: Icon(Icons.calendar_month,weight: 20),
-                         title: Text('EVENTS CALENDAR',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.center,)),
-                   ),
-                 ) ,
-                  SizedBox(
-                    height: 20,
-                  ),
-                 Container(
-                   height: 200,
-                   width: 380,
-                   decoration: BoxDecoration(
-                     color: Colors.white,
-                     borderRadius: BorderRadius.circular(10),
-                     border: Border.all(width: 3,style: BorderStyle.solid),
-                   ),
-                   child: Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: CalendarTimeline(
-                         showYears: true,
-                         initialDate: _selectedDate,
-                         firstDate: DateTime.now(),
-                         lastDate: DateTime.now().add(const Duration(days: 365*4)),
-                         onDateSelected: (date) => setState(()   =>_selectedDate = date),
-                         monthColor: Colors.black,
-                         dayColor: Colors.black,
-                         dayNameColor: Colors.greenAccent,
-                         activeDayColor: Colors.deepOrangeAccent,
-                         activeBackgroundDayColor: Colors.black,
-                         dotsColor: Colors.white,
-                         selectableDayPredicate: (date) => date.day!=23,
-                         locale: 'en',),
-                   ),
-                 ),
-              ],
-            ),
-          ),
-        ),
+              ),
+            ChatPage(),
+       ], ),
     );
   }
 }
@@ -384,14 +480,14 @@ class MainDrawer extends StatelessWidget
             title: Text("Buy/Sell", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
             onTap: ()
             {
-              Navigator.pop(context);
+              Navigator.push(context,MaterialPageRoute(builder: (context) => BuyPage()));
             },
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 100),
           child: InkWell(
-            child: Text('About Us',
+            child: Text('Contact Us',
                 textAlign: TextAlign.center
             ),
             onTap: (){

@@ -24,14 +24,16 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Fi-Ster',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 25),),
-      ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            AppBar(
+              backgroundColor: Colors.deepOrange,
+              title: Title(color: Colors.white, child: Text('Fi-ster',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,),),),
+              elevation: 3,
+            ),
             SafeArea(
               child: Padding(
                 padding: EdgeInsets.only(left: 16,right: 16,top: 10),
@@ -94,6 +96,7 @@ class _ChatPageState extends State<ChatPage> {
 
     },
             ),
+            SizedBox(height: 300),
           ],
         ),
       ),
@@ -101,22 +104,3 @@ class _ChatPageState extends State<ChatPage> {
   }
 }
 
-class RecentChats extends StatefulWidget {
-  const RecentChats({Key? key}) : super(key: key);
-
-  @override
-  State<RecentChats> createState() => _RecentChatsState();
-}
-
-class _RecentChatsState extends State<RecentChats> {
-  @override
-  Widget build(BuildContext context) {
-   return Scaffold(
-     body: Container(
-       color: Colors.black,
-       width:100,
-     ),
-   );
-
-  }
-}

@@ -39,6 +39,13 @@ dependencies:
   calendar_timeline: ^1.1.2
   flutter_switch: ^0.3.2
   contactus: ^1.2.3
+  download_manager: ^1.0.1+2
+  auto_size_text: ^3.0.0
+  http: ^0.13.5
+  rxdart: ^0.27.7
+  flutter_cached_pdfview: ^0.4.1
+  swipe: ^0.0.1
+  calendar_appbar: ^0.0.6
 
 
 dev_dependencies:
@@ -67,7 +74,8 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
+  assets:
+    - assets/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

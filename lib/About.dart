@@ -12,7 +12,7 @@ class _AboutPageState extends State<AboutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('ABOUT US',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 25),),
+          title: Text('CONTACT US',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 25),),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -28,7 +28,7 @@ class _AboutPageState extends State<AboutPage> {
                   email: 'nishant_shinde_aids@moderncoe.edu.in',
                   companyColor: Colors.black,
                   taglineColor: Colors.orangeAccent,
-                  instagram: '',
+                  instagram: 'nishantshinde3553',
                   linkedinURL: '',
               ),
               SizedBox(height: 20),
@@ -40,7 +40,7 @@ class _AboutPageState extends State<AboutPage> {
                 email: 'raj_shinde_aids@moderncoe.edu.in',
                 companyColor: Colors.black,
                 taglineColor: Colors.orangeAccent,
-                instagram: '',
+                instagram: 'raj_shinde_009',
                 linkedinURL: '',
               ),
               SizedBox(height: 20),
@@ -52,7 +52,7 @@ class _AboutPageState extends State<AboutPage> {
                 email: 'mahesh_shriram_aids@moderncoe.edu.in',
                 companyColor: Colors.black,
                 taglineColor: Colors.orangeAccent,
-                instagram: '',
+                instagram: 'mahesh__shriram',
                 linkedinURL: '',
               ),
               SizedBox(height: 20),
@@ -64,7 +64,7 @@ class _AboutPageState extends State<AboutPage> {
                 email: 'harshal_tak_aids@moderncoe.edu.in',
                 companyColor: Colors.black,
                 taglineColor: Colors.orangeAccent,
-                instagram: '',
+                instagram: 'ht.on.insta',
                 linkedinURL: '',
               ),
               SizedBox(height: 20),
@@ -76,7 +76,7 @@ class _AboutPageState extends State<AboutPage> {
                 email: 'pratik_wangaskar_aids@moderncoe.edu.in',
                 companyColor: Colors.black,
                 taglineColor: Colors.orangeAccent,
-                instagram: '',
+                instagram: 'pratiknw_1711',
                 linkedinURL: '',
               ),
             ],
