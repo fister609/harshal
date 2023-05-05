@@ -26,8 +26,9 @@ class _CalendarPageState extends State<CalendarPage> {
             padding: 8,
             accent: Colors.deepOrangeAccent,
             onDateChanged: (value) => setState(() => selectedDate = value),
-            lastDate: DateTime.now(),
-            events: List.generate(100, (index) => DateTime.now().subtract(Duration(days: index * random.nextInt(5)))),
+            firstDate: DateTime.now(),
+            lastDate: DateTime.now().add(Duration(days: 30)),
+            events: List.generate(100, (index) => DateTime.now().add(Duration(days: index * random.nextInt(5)))),
         ),
         body: ListView.builder(
             itemCount: 3,
