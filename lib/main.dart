@@ -14,12 +14,14 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:firebase_core/firebase_core.dart';
 Future<String> loadAsset() async {
   return await rootBundle.loadString('assets/assets/icon_updated.png');
 }
 
-void main()
-{
+main() async{
+WidgetsFlutterBinding.ensureInitialized();
+await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -70,7 +72,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int pageindex = 2;
-  final pages = [BuyPage(), StudySearch(),EventsPage(),SearchList(),GFG()];
+  final pages = [BuyPage(), StudyApp(),EventsPage(),SearchList(),GFG()];
   var _appPageController = PageController();
 
   setBottomBarIndex(index) {
