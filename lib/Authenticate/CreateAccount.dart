@@ -1,6 +1,6 @@
-import 'package:study/Authenticate/Methods.dart';
+import 'package:first/Authenticate/Methods.dart';
 import 'package:flutter/material.dart';
-
+import 'package:first/main.dart';
 import '../Screens/HomeScreen.dart';
 
 class CreateAccount extends StatefulWidget {
@@ -127,7 +127,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 isLoading = false;
               });
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => HomeScreen()));
+                  context, MaterialPageRoute(builder: (_) => HomePage()));
               print("Account Created Sucessfull");
             } else {
               print("Login Failed");

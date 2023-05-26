@@ -1,9 +1,10 @@
-import 'package:study/Authenticate/Methods.dart';
-import 'package:study/Screens/ChatRoom.dart';
-import 'package:study/group_chats/group_chat_screen.dart';
+import 'package:first/Authenticate/Methods.dart';
+import 'package:first/Screens/ChatRoom.dart';
+import 'package:first/group_chats/group_chat_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:first/main.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -76,7 +77,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Screen"),
+        title: Text("Chats"),
+        leading: IconButton(icon: Icon(Icons.home),onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => HomePage()));}),
         actions: [
           IconButton(icon: Icon(Icons.logout), onPressed: () => logOut(context))
         ],

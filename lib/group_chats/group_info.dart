@@ -1,5 +1,5 @@
-import 'package:study/Screens/HomeScreen.dart';
-import 'package:study/group_chats/add_members.dart';
+import 'package:first/Screens/HomeScreen.dart';
+import 'package:first/group_chats/add_members.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

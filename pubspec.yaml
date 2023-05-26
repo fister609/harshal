@@ -58,6 +58,8 @@ dependencies:
   lottie: ^2.3.2
   url_launcher: ^6.1.10
   flutter_linkify: ^5.0.2
+  firebase_auth: ^4.6.0
+  image_picker: ^0.8.7+5
 
 dev_dependencies:
   flutter_test:

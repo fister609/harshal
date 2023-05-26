@@ -1,4 +1,4 @@
-import 'package:study/group_chats/create_group/create_group.dart';
+import 'package:first/group_chats/create_group/create_group.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

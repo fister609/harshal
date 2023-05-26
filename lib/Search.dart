@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'main.dart';
 class GFG extends StatefulWidget {
   const GFG({Key? key}) : super(key: key);
 
@@ -14,6 +14,7 @@ class _GFGState extends State<GFG> {
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
         title: Text('Search',style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+        leading: IconButton(icon: Icon(Icons.home),onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => HomePage()));}),
         actions: [
           IconButton(
             onPressed: () {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'main.dart';
 class BuyPage extends StatelessWidget {
 
 
@@ -20,6 +20,7 @@ class BuyPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('STUFF FOR PURCHASE!',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 25),),
+          leading: IconButton(icon: Icon(Icons.home),onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => HomePage()));}),
         ),
       body: PageView(
         children: [

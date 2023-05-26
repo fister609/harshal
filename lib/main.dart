@@ -6,7 +6,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'Search.dart';
 import 'study.dart';
-import 'chat.dart';
 import 'profile.dart';
 import 'package:first/About.dart';
 import 'calendar.dart';
@@ -15,11 +14,14 @@ import 'package:lottie/lottie.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:first/Authenticate/Autheticate.dart';
+import 'package:first/Screens/HomeScreen.dart';
+
 Future<String> loadAsset() async {
   return await rootBundle.loadString('assets/assets/icon_updated.png');
 }
 
-main() async{
+Future main() async{
 WidgetsFlutterBinding.ensureInitialized();
 await Firebase.initializeApp();
   runApp(MyApp());
@@ -56,7 +58,7 @@ class SplashScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         duration: 2500 ,
-        nextScreen: HomePage(),
+        nextScreen: Authenticate(),
         splashIconSize: 300,
         splashTransition: SplashTransition.scaleTransition,
     );
@@ -72,7 +74,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int pageindex = 2;
-  final pages = [BuyPage(), StudyApp(),EventsPage(),SearchList(),GFG()];
+  final pages = [BuyPage(), StudyApp(),EventsPage(),HomeScreen(),GFG()];
   var _appPageController = PageController();
 
   setBottomBarIndex(index) {

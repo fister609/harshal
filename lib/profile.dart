@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'About.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:first/Authenticate/Methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -85,6 +88,7 @@ class _ProfileState extends State<Profile> {
             // TogleButtons(children: [], isSelected:  ),
             Center(
               child: ElevatedButton(onPressed: (){
+                IconButton(icon: Icon(Icons.logout), onPressed: () => logOut(context));
               }, child: Text("Logout",style: TextStyle(color: Colors.white),),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,

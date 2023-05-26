@@ -1,6 +1,7 @@
-import 'package:study/Authenticate/CreateAccount.dart';
-import 'package:study/Screens/HomeScreen.dart';
-import 'package:study/Authenticate/Methods.dart';
+import 'package:first/Authenticate/CreateAccount.dart';
+import 'package:first/Screens/HomeScreen.dart';
+import 'package:first/Authenticate/Methods.dart';
+import 'package:first/main.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -118,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 isLoading = false;
               });
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => HomeScreen()));
+                  context, MaterialPageRoute(builder: (_) => HomePage()));
             } else {
               print("Login Failed");
               setState(() {

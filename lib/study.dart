@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'main.dart';
 
 
 class StudyApp extends StatefulWidget {
@@ -49,6 +50,7 @@ class _StudyAppState extends State<StudyApp> {
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
         title: Text('Study Material',style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+        leading: IconButton(icon: Icon(Icons.home),onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => HomePage()));}),
         actions: [
           IconButton(
             onPressed: () {// method to show the search bar
