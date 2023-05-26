@@ -195,14 +195,14 @@ class _EventsPageState extends State<EventsPage> {
           child: Container(
             width: double.infinity,
             height: 200,
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(7),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Flexible(
                   child: Image.network(
                     imageUrl,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
                 SizedBox(height: 10),

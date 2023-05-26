@@ -144,14 +144,6 @@ class _SearchPageState extends State<SearchPage>
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.group),
-        onPressed: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => GroupChatHomeScreen(),
-          ),
-        ),
-      ),
     );
   }
 }

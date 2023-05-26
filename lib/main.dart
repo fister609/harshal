@@ -47,13 +47,12 @@ class SplashScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(height: 200),
+              SizedBox(height: 80),
               Container(
                 child:CircleAvatar(
                   radius: 100,
                   foregroundImage: AssetImage('assets/Icon/icon.jpg'),),
               ),
-              SizedBox(height: 20),
               Text('Fi-ster',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,),),
               SizedBox(height: 50),
               Container(
