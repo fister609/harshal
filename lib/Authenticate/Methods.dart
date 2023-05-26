@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 Future<User?> createAccount(String name, String email, String password) async {
   FirebaseAuth _auth = FirebaseAuth.instance;
-
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   try {
@@ -19,6 +18,7 @@ Future<User?> createAccount(String name, String email, String password) async {
     await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
       "name": name,
       "email": email,
+      "password": password,
       "status": "Unavalible",
       "uid": _auth.currentUser!.uid,
     });

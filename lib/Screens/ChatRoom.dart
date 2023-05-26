@@ -47,7 +47,7 @@ class ChatRoom extends StatelessWidget {
     });
 
     var ref =
-        FirebaseStorage.instance.ref().child('images').child("$fileName.jpg");
+    FirebaseStorage.instance.ref().child('images').child("$fileName.jpg");
 
     var uploadTask = await ref.putFile(imageFile!).catchError((error) async {
       await _firestore
@@ -102,7 +102,7 @@ class ChatRoom extends StatelessWidget {
       appBar: AppBar(
         title: StreamBuilder<DocumentSnapshot>(
           stream:
-              _firestore.collection("users").doc(userMap['uid']).snapshots(),
+          _firestore.collection("users").doc(userMap['uid']).snapshots(),
           builder: (context, snapshot) {
             if (snapshot.data != null) {
               return Container(
@@ -133,12 +133,12 @@ class ChatRoom extends StatelessWidget {
                     .collection('chatroom')
                     .doc(chatRoomId)
                     .collection('chats')
-                    .orderBy("time", descending: false)
+                    .orderBy("time", descending: true)
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.data != null) {
-                    return ListView.builder(
+                    return ListView.builder(reverse: true,
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         Map<String, dynamic> map = snapshot.data!.docs[index]
@@ -193,56 +193,56 @@ class ChatRoom extends StatelessWidget {
   Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
     return map['type'] == "text"
         ? Container(
-            width: size.width,
-            alignment: map['sendby'] == _auth.currentUser!.displayName
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.blue,
-              ),
-              child: Text(
-                map['message'],
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          )
+      width: size.width,
+      alignment: map['sendby'] == _auth.currentUser!.displayName
+          ? Alignment.centerRight
+          : Alignment.centerLeft,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.blue,
+        ),
+        child: Text(
+          map['message'],
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    )
         : Container(
-            height: size.height / 2.5,
-            width: size.width,
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-            alignment: map['sendby'] == _auth.currentUser!.displayName
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
-            child: InkWell(
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => ShowImage(
-                    imageUrl: map['message'],
-                  ),
-                ),
-              ),
-              child: Container(
-                height: size.height / 2.5,
-                width: size.width / 2,
-                decoration: BoxDecoration(border: Border.all()),
-                alignment: map['message'] != "" ? null : Alignment.center,
-                child: map['message'] != ""
-                    ? Image.network(
-                        map['message'],
-                        fit: BoxFit.cover,
-                      )
-                    : CircularProgressIndicator(),
-              ),
+      height: size.height / 2.5,
+      width: size.width,
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      alignment: map['sendby'] == _auth.currentUser!.displayName
+          ? Alignment.centerRight
+          : Alignment.centerLeft,
+      child: InkWell(
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => ShowImage(
+              imageUrl: map['message'],
             ),
-          );
+          ),
+        ),
+        child: Container(
+          height: size.height / 2.5,
+          width: size.width / 2,
+          decoration: BoxDecoration(border: Border.all()),
+          alignment: map['message'] != "" ? null : Alignment.center,
+          child: map['message'] != ""
+              ? Image.network(
+            map['message'],
+            fit: BoxFit.cover,
+          )
+              : CircularProgressIndicator(),
+        ),
+      ),
+    );
   }
 }
 

@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'main.dart';
 
-
 class StudyApp extends StatefulWidget {
   const StudyApp({Key? key}) : super(key: key);
 
@@ -20,74 +19,116 @@ class StudyApp extends StatefulWidget {
 class _StudyAppState extends State<StudyApp> {
   String url = '';
   int? number;
-  uploadDataToFirebase() async{
-    //generate random number
+  bool uploading = false;
+  double uploadProgress = 0.0;
+
+  uploadDataToFirebase() async {
+    // Generate random number
     number = Random().nextInt(10);
-    //pick pdf file
+    // Pick pdf file
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     File pick = File(result!.files.single.path.toString());
     var file = pick.readAsBytesSync();
     String name = basename(pick.path);
-    //upload pdf file to firebase
+    // Upload pdf file to Firebase
     var pdfFile = FirebaseStorage.instance.ref().child(name).child("/.pdf");
     UploadTask task = pdfFile.putData(file);
-    TaskSnapshot snapshot = await task;
-    url = await snapshot.ref.getDownloadURL();
-    //upload url to cloud firebase
-    await FirebaseFirestore.instance.collection("file").doc().set({
-      'fileUrl':url,
-      'num':name,
+    setState(() {
+      uploading = true;
     });
-
-
-
-// Delete the file
-
+    task.snapshotEvents.listen((TaskSnapshot snapshot) {
+      double progress = snapshot.bytesTransferred / snapshot.totalBytes;
+      setState(() {
+        uploadProgress = progress;
+      });
+    });
+    TaskSnapshot snapshot = await task;
+    setState(() {
+      uploading = false;
+    });
+    url = await snapshot.ref.getDownloadURL();
+    // Upload url to Cloud Firestore
+    await FirebaseFirestore.instance.collection("file").doc().set({
+      'fileUrl': url,
+      'num': name,
+    });
   }
+
+  deleteDataFromFirebase(String documentId) async {
+    await FirebaseFirestore.instance.collection("file").doc(documentId).delete();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
-        title: Text('Study Material',style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
-        leading: IconButton(icon: Icon(Icons.home),onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => HomePage()));}),
+        title: Text(
+          'Study Material',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
-            onPressed: () {// method to show the search bar
+            onPressed: () {
+              // Method to show the search bar
             },
             icon: const Icon(Icons.search),
           )
         ],
       ),
       body: StreamBuilder(
-          stream:FirebaseFirestore.instance.collection("file").snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if(snapshot.hasData){
-              return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context,i){
-                    QueryDocumentSnapshot x = snapshot.data!.docs[i];
-                    return ListTile(
-                      title: Text(x['num']),
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => View(url: x['fileUrl'],)));
+        stream: FirebaseFirestore.instance.collection("file").snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, i) {
+                QueryDocumentSnapshot x = snapshot.data!.docs[i];
+                return ListTile(
+                  title: Text(x['num']),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => View(url: x['fileUrl'])));
+                  },
+                  onLongPress: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Delete File'),
+                          content: Text('Are you sure you want to delete this file?'),
+                          actions: [
+                            TextButton(
+                              child: Text('Cancel'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: Text('Delete'),
+                              onPressed: () {
+                                deleteDataFromFirebase(x.id);
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
                       },
-                      onLongPress: (){
-
-                      },
-                      trailing: Text('AI&DS'),
-                      /*child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: Text(x['num']),*/
                     );
-                  });
-            }
-            return Center(
-              child: CircularProgressIndicator(),
+                  },
+                  trailing: Text('AI&DS'),
+                );
+              },
             );
           }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
-      floatingActionButton: FloatingActionButton(onPressed: uploadDataToFirebase,child: Icon(Icons.add),),
+      floatingActionButton: FloatingActionButton(
+        onPressed: uploadDataToFirebase,
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
@@ -95,7 +136,9 @@ class _StudyAppState extends State<StudyApp> {
 class View extends StatelessWidget {
   PdfViewerController? _pdfViewerController;
   final url;
+
   View({this.url});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

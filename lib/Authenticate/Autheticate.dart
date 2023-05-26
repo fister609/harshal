@@ -1,7 +1,7 @@
 import 'package:first/Screens/HomeScreen.dart';
 import 'package:first/Authenticate/LoginScree.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:first/main.dart';
+import 'package:first/homepage.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatelessWidget {

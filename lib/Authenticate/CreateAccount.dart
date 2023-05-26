@@ -1,6 +1,8 @@
+import 'package:first/Authenticate/LoginScree.dart';
 import 'package:first/Authenticate/Methods.dart';
+import 'package:first/homepage.dart';
 import 'package:flutter/material.dart';
-import 'package:first/main.dart';
+
 import '../Screens/HomeScreen.dart';
 
 class CreateAccount extends StatefulWidget {
@@ -21,93 +23,93 @@ class _CreateAccountState extends State<CreateAccount> {
     return Scaffold(
       body: isLoading
           ? Center(
-              child: Container(
-                height: size.height / 20,
-                width: size.height / 20,
-                child: CircularProgressIndicator(),
-              ),
-            )
+        child: Container(
+          height: size.height / 20,
+          width: size.height / 20,
+          child: CircularProgressIndicator(),
+        ),
+      )
           : SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: size.height / 20,
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    width: size.width / 0.5,
-                    child: IconButton(
-                        icon: Icon(Icons.arrow_back_ios), onPressed: () {}),
-                  ),
-                  SizedBox(
-                    height: size.height / 50,
-                  ),
-                  Container(
-                    width: size.width / 1.1,
-                    child: Text(
-                      "Welcome",
-                      style: TextStyle(
-                        fontSize: 34,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: size.width / 1.1,
-                    child: Text(
-                      "Create Account to Contiue!",
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.height / 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 18.0),
-                    child: Container(
-                      width: size.width,
-                      alignment: Alignment.center,
-                      child: field(size, "Name", Icons.account_box, _name),
-                    ),
-                  ),
-                  Container(
-                    width: size.width,
-                    alignment: Alignment.center,
-                    child: field(size, "email", Icons.account_box, _email),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 18.0),
-                    child: Container(
-                      width: size.width,
-                      alignment: Alignment.center,
-                      child: field(size, "password", Icons.lock, _password),
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.height / 20,
-                  ),
-                  customButton(size),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+        child: Column(
+          children: [
+            SizedBox(
+              height: size.height / 20,
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              width: size.width / 0.5,
+              child: IconButton(
+                  icon: Icon(Icons.arrow_back_ios), onPressed: () {}),
+            ),
+            SizedBox(
+              height: size.height / 50,
+            ),
+            Container(
+              width: size.width / 1.1,
+              child: Text(
+                "Welcome",
+                style: TextStyle(
+                  fontSize: 34,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
+            Container(
+              width: size.width / 1.1,
+              child: Text(
+                "Create Account to Contiue!",
+                style: TextStyle(
+                  color: Colors.grey[700],
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: size.height / 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 18.0),
+              child: Container(
+                width: size.width,
+                alignment: Alignment.center,
+                child: field(size, "Name", Icons.account_box, _name),
+              ),
+            ),
+            Container(
+              width: size.width,
+              alignment: Alignment.center,
+              child: field(size, "email", Icons.account_box, _email),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 18.0),
+              child: Container(
+                width: size.width,
+                alignment: Alignment.center,
+                child: field(size, "password", Icons.lock, _password),
+              ),
+            ),
+            SizedBox(
+              height: size.height / 20,
+            ),
+            customButton(size),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -127,7 +129,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 isLoading = false;
               });
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => HomePage()));
+                  context, MaterialPageRoute(builder: (_) => LoginScreen()));
               print("Account Created Sucessfull");
             } else {
               print("Login Failed");

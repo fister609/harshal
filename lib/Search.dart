@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+
 class GFG extends StatefulWidget {
   const GFG({Key? key}) : super(key: key);
 
@@ -14,7 +14,6 @@ class _GFGState extends State<GFG> {
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
         title: Text('Search',style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
-        leading: IconButton(icon: Icon(Icons.home),onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => HomePage()));}),
         actions: [
           IconButton(
             onPressed: () {
@@ -119,7 +118,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   var AIDS = ['Harshal Tak','Nishant Shinde','Raj Shinde','Pratik Wangaskar','Mahesh Shriram'];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,8 +169,8 @@ class _SearchPageState extends State<SearchPage> {
   Widget buildText(BuildContext context) => SingleChildScrollView(
     child: ExpansionTile(
       title: Text(
-          'Artificial Intelligence and Data Science',
-          style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
+        'Artificial Intelligence and Data Science',
+        style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
       ),
       children: [
         ListView.builder(
@@ -213,4 +212,3 @@ class _SearchPageState extends State<SearchPage> {
     ),
   );
 }
-
