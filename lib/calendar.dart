@@ -22,7 +22,7 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 
   Future<void> fetchEvents() async {
-    final snapshot = await FirebaseFirestore.instance.collection('events').get();
+    final snapshot = await FirebaseFirestore.instance.collection('calendar').get();
     setState(() {
       events = snapshot.docs.map((doc) => (doc['date'] as Timestamp).toDate()).toList();
     });
@@ -31,27 +31,51 @@ class _CalendarPageState extends State<CalendarPage> {
   Future<void> addEventToFirebase() async {
     String eventText = eventController.text;
     if (eventText.isNotEmpty) {
-      if (isEditing) {
-        await FirebaseFirestore.instance.collection("events").doc(eventId).update({
-          'event': eventText,
+      try {
+        if (isEditing) {
+          await FirebaseFirestore.instance
+              .collection("calendar")
+              .doc(eventId)
+              .update({
+            'event': eventText,
+          });
+        } else {
+          await FirebaseFirestore.instance.collection("calendar").add({
+            'date': selectedDate,
+            'event': eventText,
+          });
+        }
+        setState(() {
+          eventController.clear();
+          isEditing = false;
+          eventId = null;
+          fetchEvents(); // Refresh the events list
         });
-      } else {
-        await FirebaseFirestore.instance.collection("events").add({
-          'date': selectedDate,
-          'event': eventText,
-        });
+      } catch (error) {
+        // Handle the error
+        print("Error adding event: $error");
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Failed to add event. Please try again.'),
+              actions: [
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            );
+          },
+        );
       }
-      setState(() {
-        eventController.clear();
-        isEditing = false;
-        eventId = null;
-        fetchEvents(); // Refresh the events list
-      });
     }
   }
 
+
   Future<void> deleteEvent(String eventId) async {
-    await FirebaseFirestore.instance.collection("events").doc(eventId).delete();
+    await FirebaseFirestore.instance.collection("calendar").doc(eventId).delete();
     setState(() {
       fetchEvents(); // Refresh the events list
     });
@@ -84,7 +108,7 @@ class _CalendarPageState extends State<CalendarPage> {
         children: [
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('events').where('date', isEqualTo: selectedDate).snapshots(),
+              stream: FirebaseFirestore.instance.collection('calendar').where('date', isEqualTo: selectedDate).snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final events = snapshot.data!.docs;

@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int pageindex = 2;
-  final pages = [BuyPage(), StudyApp(),EventsPage(),HomeScreen(),GFG()];
+  final pages = [BuyPage(), StudyApp(),EventsPage(),HomeScreen(),SearchPage()];
   var _appPageController = PageController();
 
   setBottomBarIndex(index) {

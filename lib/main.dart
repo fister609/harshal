@@ -45,7 +45,7 @@ class SplashScreen extends StatelessWidget {
       body:Center(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(height: 200),
               Container(
@@ -55,7 +55,7 @@ class SplashScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text('Fi-ster',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,),),
-              SizedBox(height: 180),
+              SizedBox(height: 50),
               Container(
                 width: 150,
                 height: 70,
@@ -63,7 +63,7 @@ class SplashScreen extends StatelessWidget {
                 child: ElevatedButton(onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => Authenticate()));}
                   , child: Text("Let's Start!",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),),
               ),
-              SizedBox(height: 80),
+              SizedBox(height: 50),
               Text('By Team Fi-ster',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
             ]),
       ),
